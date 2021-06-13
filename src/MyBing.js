@@ -33,51 +33,73 @@ class MyBing extends Component {
     // var center = map.getCenter();
 
     //Create custom Pushpin
-    var pin1 = new window.Microsoft.Maps.Pushpin({altitude: 0,
-      altitudeReference: -1,
-      latitude: 13.083,
-      longitude: 80.16  }, {
-        title: 'Microsoft',
-        subTitle: 'City Center',
-        text: '1st',
-        color:"red"
-    });
-    var pin3 = new window.Microsoft.Maps.Pushpin( {altitude: 0,
-      altitudeReference: -1,
-      latitude: 13.083,
-      longitude: 80.26  }, {
-      title: 'Microsoft',
-      subTitle: 'City Center',
-      text: '3rd',
-      color:"blue"
-  });
-    //Add the pushpin to the map
+  //   var pin1 = new window.Microsoft.Maps.Pushpin({altitude: 0,
+  //     altitudeReference: -1,
+  //     latitude: 13.083,
+  //     longitude: 80.16  }, {
+  //       title: 'Microsoft',
+  //       subTitle: 'City Center',
+  //       text: '1st',
+  //       color:"red"
+  //   });
+  //   var pin3 = new window.Microsoft.Maps.Pushpin( {altitude: 0,
+  //     altitudeReference: -1,
+  //     latitude: 13.083,
+  //     longitude: 80.26  }, {
+  //     title: 'Microsoft',
+  //     subTitle: 'City Center',
+  //     text: '3rd',
+  //     color:"blue"
+  // });
+  //   //Add the pushpin to the map
     
 
-    var pin2 = new window.Microsoft.Maps.Pushpin( 
+  //   var pin2 = new window.Microsoft.Maps.Pushpin( 
+  //     {altitude: 0,
+  //       altitudeReference: -1,
+  //       latitude: 13.123,
+  //       longitude: 80.27  }
+      
+      
+  //     , {
+  //     title: 'Microsoft',
+  //     subTitle: 'City Center',
+  //     text: 'second',
+  //     color:"black"
+  // });
+
+  // //Add the pushpin to the map
+  // map.entities.push(pin2);
+  // map.entities.push(pin3);
+  // map.entities.push(pin1);
+  // return this.GetConvexHull({pin1,pin2, pin3} , map)
+  let arrPins = []
+  values.forEach((value , index) => {
+    
+     var pin = new window.Microsoft.Maps.Pushpin( 
       {altitude: 0,
         altitudeReference: -1,
-        latitude: 13.123,
-        longitude: 80.27  }
+        latitude: value[0],
+        longitude:value[1]  }
       
       
       , {
-      title: 'Microsoft',
-      subTitle: 'City Center',
-      text: 'second',
-      color:"black"
+      title: index,
+      subTitle: index,
+      // text: 'second',
+      // color:"black"
   });
+  arrPins.push(pin)
+})
+ 
+return this.GetConvexHull(arrPins , map)
+   }
 
-  //Add the pushpin to the map
-  map.entities.push(pin2);
-  map.entities.push(pin3);
-  map.entities.push(pin1);
-  return this.GetConvexHull({pin1,pin2, pin3} , map)
-}
+
+
+  GetConvexHull = (arrPins , map) => {
  
-  GetConvexHull = ( {pin1,pin2, pin3} , map) => {
- 
-    const pins = [pin1,pin2, pin3]
+    const pins = arrPins
   
     //  const  map = new window.Microsoft.Maps.Map('#myMap', {});
     //  console.log('map :>> ', map);
