@@ -10,12 +10,23 @@ class MyBing extends Component {
     super(props);
     this.myRef = React.createRef();
   }
+ 
+  componentDidUpdate(prevProps, prevState) {
+    let values;
+    if(this.props.values != prevProps.values)
+   {
+     values = this.props.values.map(a => a.split(',').map(b=> b.split(','))  )
+    console.log('values :>> ', values);}
+    this.GetMap(values)
+  }
+  
   callBackMethod =  () =>{}
-   GetMap = async() => {
+   GetMap = async(values) => {
      
         console.log  ("inside")
         const map = new window.Microsoft.Maps.Map('#myMap', {
-        center: new window.Microsoft.Maps.Location(13.0827, 80.2707)
+        // center: new window.Microsoft.Maps.Location(13.0827, 80.2707)
+        center: new window.Microsoft.Maps.Location(values[0][0], values[0][1])
     });
      await window.Microsoft.Maps.loadModule("Microsoft.Maps.SpatialMath");
      console.log('center :>> ', window.Microsoft.Maps);
@@ -78,16 +89,7 @@ class MyBing extends Component {
     map.entities.push(hullPolygon);
     map.entities.push(pins);
    
-  //  console.log(`map`, map)
    
-    // map.entities.clear();
-
-    // //Calculate the concave hull.
-    // var hullPolygon = window.Microsoft.Maps.SpatialMath.Geometry.concaveHull(pins);
-
-    // //Add the data to the map.
-    // map.entities.push(hullPolygon);
-    // map.entities.push(pins);
 
   }
   render() {

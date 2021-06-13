@@ -21,7 +21,8 @@ const formItemLayoutWithOutLabel = {
 const DynamicFieldSet = (props) => {
   const onFinish = values => {
     console.log('Received values of form:', values);
-    props.setValues(values)
+     
+    props.setValues(values.names)
   };
 
   return (
